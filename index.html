@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nishant Deswal - Python Developer & Data Engineer Portfolio">
+    <title>Nishant Deswal - Portfolio</title>
+    
+    <link rel="icon" type="image/png" href="static/images/chip.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animation Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="static/css/main.css">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-in',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'scale-in': 'scaleIn 0.3s ease-out',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-gray-900">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-600"></div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 z-50">
+        <div id="progress-bar" class="h-full bg-blue-600 transition-all duration-300"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo/Name -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-gray-800 dark:text-white">
+                        Nishant<span class="text-blue-600">.</span>
+                    </a>
+                </div>
+                
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#" class="nav-link text-gray-600 hover:text-blue-600">Home</a>
+                        <a href="#about" class="nav-link text-gray-600 hover:text-blue-600">About</a>
+                        <a href="#experience" class="nav-link text-gray-600 hover:text-blue-600">Experience</a>
+                        <a href="#projects" class="nav-link text-gray-600 hover:text-blue-600">Projects</a>
+                        <a href="#skills" class="nav-link text-gray-600 hover:text-blue-600">Skills</a>
+                        <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="mobile-menu-button">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="md:hidden mobile-menu hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="mobile-link">Home</a>
+                <a href="#about" class="mobile-link">About</a>
+                <a href="#experience" class="mobile-link">Experience</a>
+                <a href="#projects" class="mobile-link">Projects</a>
+                <a href="#skills" class="mobile-link">Skills</a>
+                <a href="#contact" class="mobile-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Include all sections -->
+        <div id="hero-section"></div>
+        <div id="about-section"></div>
+        <div id="experience-section"></div>
+        <div id="projects-section"></div>
+        <div id="skills-section"></div>
+        <div id="contact-section"></div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 z-50 p-2 rounded-full bg-blue-600 text-white shadow-lg transition-all duration-300 opacity-0 translate-y-10">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">© 2024 Nishant Deswal. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- Load sections -->
+    <script>
+        // Function to load HTML content
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${url}:`, error);
+            }
+        }
+
+        // Load all sections
+        document.addEventListener('DOMContentLoaded', async () => {
+            await Promise.all([
+                loadHTML('static/sections/hero.html', 'hero-section'),
+                loadHTML('static/sections/about.html', 'about-section'),
+                loadHTML('static/sections/experience.html', 'experience-section'),
+                loadHTML('static/sections/projects.html', 'projects-section'),
+                loadHTML('static/sections/skills.html', 'skills-section'),
+                loadHTML('static/sections/contact.html', 'contact-section')
+            ]);
+
+            // Initialize AOS after content is loaded
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+
+            // Initialize particles.js for hero section
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 80, density: { enable: true, value_area: 800 } },
+                    color: { value: '#ffffff' },
+                    shape: { type: 'circle' },
+                    opacity: { value: 0.5, random: true },
+                    size: { value: 3, random: true },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: 'none',
+                        random: true,
+                        out_mode: 'out'
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: { enable: true, mode: 'repulse' },
+                        onclick: { enable: true, mode: 'push' },
+                        resize: true
+                    }
+                }
+            });
+        });
+    </script>
+
+    <!-- Custom JavaScript -->
+    <script src="static/js/main.js"></script>
+</body>
+</html>
